@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../../index')
+const app = require('../../server/index')
 
 describe('Testing root', () => {
   test('It should answer with 200 Ok on GET', done => {

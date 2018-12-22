@@ -1,5 +1,5 @@
 const express = require('express')
-const logger = require('./utils/logger')
+const logger = require('../utils/logger')
 const app = express()
 
 app.set('port', process.env.PORT || 3000)
