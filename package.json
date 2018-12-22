@@ -6,15 +6,16 @@
   "repository": "https://github.com/omarvides/crud-challenge-backend",
   "author": "omarvides <omarvides@gmail.com>",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server/index.js",
     "test": "jest --forceExit",
     "unit": "jest unit",
     "integration": "jest integration --forceExit"
   },
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "prom-client": "^11.2.1",
+    "express-prom-bundle": "^4.2.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {
