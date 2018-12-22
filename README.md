@@ -12,6 +12,4 @@
 
 ## Changelog
 
-* Next version: 
-  * Minimal functionality / endpoint with simple hello
-  * Minimal project structure
+[CHANGELOG DOCUMENT](CHANGELOG.md)
