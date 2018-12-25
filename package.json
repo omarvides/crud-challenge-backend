@@ -6,10 +6,11 @@
   "repository": "https://github.com/omarvides/crud-challenge-backend",
   "author": "omarvides <omarvides@gmail.com>",
   "scripts": {
+    "pre-commit": "npm test",
     "start": "node server/index.js",
-    "test": "jest --forceExit",
-    "unit": "jest unit",
-    "integration": "jest integration --forceExit"
+    "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests",
+    "unit": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
+    "integration": "node_modules/mocha/bin/mocha --exit --recursive ./tests/integration"
   },
   "license": "MIT",
   "dependencies": {
@@ -19,7 +20,9 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "pre-commit": "^1.2.2",
     "prettier": "1.15.3",
     "supertest": "^3.3.0"
   }
