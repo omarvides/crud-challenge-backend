@@ -6,15 +6,16 @@
   "repository": "https://github.com/omarvides/crud-challenge-backend",
   "author": "omarvides <omarvides@gmail.com>",
   "scripts": {
-    "pre-commit": [
-      "npm test",
-      "node_modules/prettier/bin-prettier.js --config prettier.config.js '**/*.js' --write"
-    ],
+    "lint": "node_modules/prettier/bin-prettier.js --config prettier.config.js --list-different '**/*.js'",
     "start": "node server/index.js",
     "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests",
     "unit": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
     "integration": "node_modules/mocha/bin/mocha --exit --recursive ./tests/integration"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "license": "MIT",
   "dependencies": {
     "dotenv": "^6.2.0",
