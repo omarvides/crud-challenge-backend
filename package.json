@@ -6,7 +6,10 @@
   "repository": "https://github.com/omarvides/crud-challenge-backend",
   "author": "omarvides <omarvides@gmail.com>",
   "scripts": {
-    "pre-commit": "npm test",
+    "pre-commit": [
+      "npm test",
+      "node_modules/prettier/bin-prettier.js --config prettier.config.js '**/*.js' --write"
+    ],
     "start": "node server/index.js",
     "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests",
     "unit": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
