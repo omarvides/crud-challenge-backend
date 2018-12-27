@@ -4,6 +4,8 @@
 
 ## Description
 
+This is a restful API to perform CRUD operations on a specific resource
+
 ## Deployment
 
 ## Testing
@@ -12,6 +14,4 @@
 
 ## Changelog
 
-* Next version: 
-  * Minimal functionality / endpoint with simple hello
-  * Minimal project structure
+[CHANGELOG DOCUMENT](CHANGELOG.md)

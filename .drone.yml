@@ -1,0 +1,27 @@
+pipeline:
+  backend:
+    image: node
+    environment:
+      - DB_HOST=database
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_PORT=27017
+    commands:
+      - sleep 15
+      - npm install
+      - npm test
+      - npm run acceptance
+  docker_publish:
+    image: plugins/docker:17.12
+    repo: omarvides/crud-challenge
+    dockerfile: docker/Dockerfile
+    auto_tag: true
+    secrets: [docker_username, docker_password]
+    when:
+      event: [tag]
+services:
+  database:
+    image: mongo:3
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
