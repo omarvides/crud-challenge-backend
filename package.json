@@ -8,8 +8,7 @@
   "scripts": {
     "lint": "node_modules/prettier/bin-prettier.js --config prettier.config.js --list-different '**/*.js'",
     "start": "node server/index.js",
-    "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests",
-    "unit": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
+    "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
     "integration": "node_modules/mocha/bin/mocha --exit --recursive ./tests/integration"
   },
   "pre-commit": [

@@ -1,7 +1,7 @@
 const express = require('express')
-const logger = require('../utils/logger')
+const logger = require('./utils/logger')
 const promBundle = require('express-prom-bundle')
-const promconfig = require('../utils/promconfig')
+const promconfig = require('./utils/promconfig')
 const metricsMiddleware = promBundle(promconfig)
 const app = express()
 
