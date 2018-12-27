@@ -1,5 +1,7 @@
 # Road map
 
+- [ ] Adding CRUD
+
 # Tech Debt
 
 # Changelog
