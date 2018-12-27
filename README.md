@@ -4,6 +4,8 @@
 
 ## Description
 
+This is a restful API to perform CRUD operations on a specific resource
+
 ## Deployment
 
 ## Testing

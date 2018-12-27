@@ -10,7 +10,7 @@ pipeline:
       - sleep 15
       - npm install
       - npm test
-      - npm run integration
+      - npm run acceptance
   docker_publish:
     image: plugins/docker:17.12
     repo: omarvides/crud-challenge
@@ -18,7 +18,7 @@ pipeline:
     auto_tag: true
     secrets: [docker_username, docker_password]
     when:
-      event: [ tag ]
+      event: [tag]
 services:
   database:
     image: mongo:3

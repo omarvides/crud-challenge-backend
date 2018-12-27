@@ -9,11 +9,11 @@
     "lint": "node_modules/prettier/bin-prettier.js --config prettier.config.js --list-different '**/*.js'",
     "start": "node server/index.js",
     "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
-    "integration": "node_modules/mocha/bin/mocha --exit --recursive ./tests/integration"
+    "acceptance": "node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
   },
   "pre-commit": [
     "lint",
-    "unit"
+    "test"
   ],
   "license": "MIT",
   "dependencies": {
