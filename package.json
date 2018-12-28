@@ -9,15 +9,14 @@
     "lint": "node_modules/prettier/bin-prettier.js --config prettier.config.js --list-different '**/*.js'",
     "start": "node server/index.js",
     "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
-    "acceptance": "node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
+    "acceptance": "LOG_LEVEL=error node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
   },
   "pre-commit": [
     "lint",
-    "test"
+    // "test"
   ],
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-prom-bundle": "^4.2.1",
     "mongoose": "^5.4.1",

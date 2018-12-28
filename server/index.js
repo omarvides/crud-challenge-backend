@@ -10,7 +10,7 @@ app.use(metricsMiddleware)
 
 app.get('/', (req, res) => {
   res.statusCode = 200
-  return res.send('Hello')
+  return res.json('')
 })
 
 app.listen(app.get('port'), () => {
