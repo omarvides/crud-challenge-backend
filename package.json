@@ -12,8 +12,7 @@
     "acceptance": "LOG_LEVEL=error node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
   },
   "pre-commit": [
-    "lint",
-    // "test"
+    "lint"
   ],
   "license": "MIT",
   "dependencies": {
