@@ -1,6 +1,7 @@
 # Crud challenge API
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![](https://github.clouderx.com/api/badges/omarvides/crud-challenge-backend/status.svg)](https://github.clouderx.com/omarvides/crud-challenge-backend)
 
 ## Description
 
