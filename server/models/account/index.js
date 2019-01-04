@@ -57,7 +57,20 @@ function createModel(connectionString) {
       })
       .catch(reason => callback(reason))
   }
-  function deleteAccount(options, callback) {}
+  function deleteAccount(options, callback) {
+    mongoose
+      .connect(connectionString)
+      .then(() => {
+        Account.deleteOne({ id: options.id })
+          .exec()
+          .then(results => {
+            mongoose.connection.close()
+            return callback(null, results)
+          })
+          .catch(reason => callback(reason))
+      })
+      .catch(reason => callback(reason))
+  }
 
   model.createAccount = createAccount
   model.getAccount = getAccount

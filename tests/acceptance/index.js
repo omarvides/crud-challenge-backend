@@ -93,4 +93,27 @@ describe('/account endpoint', () => {
           })
       })
   })
+
+  it('should allow to delete an existing account', done => {
+    let currentAccountId
+    request(app)
+      .post('/account')
+      .send({ email: 'delete@me.com' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body.docs).to.exist
+        expect(res.body.docs).to.be.an('object')
+        expect(res.body.docs.email).to.equal('delete@me.com')
+        currentAccountId = res.body.docs._id
+
+        request(app)
+          .delete(`/account/${currentAccountId}`)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            done(err)
+          })
+      })
+  })
 })

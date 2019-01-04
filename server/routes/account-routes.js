@@ -39,8 +39,27 @@ function configureRoutes(app, controllers) {
     controllers.update(req, (err, docs) => {
       if (err) {
         res.statusCode = 500
-        logger.error(`Error: on GET /account/:id ${err}`)
-        return res.send('An error ocurred while fetching accounts')
+        logger.error(
+          `Error: on PUT /account/:id ${err} while updating the account ${
+            req.param.id
+          }`,
+        )
+        return res.send(
+          `An error ocurred while updating the account ${req.param.id}`,
+        )
+      }
+      res.statusCode = 200
+      return res.json({ result: 'success', docs })
+    })
+  })
+  app.delete('/account/:id', (req, res) => {
+    controllers.delete(req, (err, docs) => {
+      if (err) {
+        res.statusCode = 500
+        logger.error(`Error: on DELETE /account/:id ${err}`)
+        return res.send(
+          'An error ocurred while deleting the account ${req.param.id}',
+        )
       }
       res.statusCode = 200
       return res.json({ result: 'success', docs })

@@ -38,6 +38,14 @@ function configure(model) {
         },
       )
     },
+    delete(params, callback) {
+      model.deleteAccount({ id: params.id }, (err, object) => {
+        if (err) {
+          return callback(err)
+        }
+        return callback(null, object)
+      })
+    },
   }
 }
 
