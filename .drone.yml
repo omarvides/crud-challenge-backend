@@ -1,4 +1,9 @@
 pipeline:
+  unit:
+    image: node:8-alpine
+    commands:
+      - npm install
+      - npm test
   backend:
     image: node:8-alpine
     environment:
@@ -9,7 +14,6 @@ pipeline:
     commands:
       - sleep 15
       - npm install
-      - npm test
       - npm run acceptance
   docker_publish:
     image: plugins/docker:17.12
