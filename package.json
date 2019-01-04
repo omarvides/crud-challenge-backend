@@ -1,7 +1,7 @@
 {
   "name": "crud-challenge-api",
   "version": "0.0.0",
-  "description": "A Crud API for entity with: Id and Email",
+  "description": "A Crud API to manage accouts with: Id and Email",
   "main": "index.js",
   "repository": "https://github.com/omarvides/crud-challenge-backend",
   "author": "omarvides <omarvides@gmail.com>",
@@ -12,10 +12,13 @@
     "acceptance": "LOG_LEVEL=error node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
   },
   "pre-commit": [
-    "lint"
+    "lint",
+    "test"
   ],
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-prom-bundle": "^4.2.1",
     "mongoose": "^5.4.1",

@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose')
 
-const emailSchema = new Schema({
+const accountSchema = new Schema({
   email: { type: String, required: true, unique: true },
 })
 
-const Email = model('Email', emailSchema)
+const Account = model('account', accountSchema)
 
 module.exports = {
-  Email,
+  Account,
 }
