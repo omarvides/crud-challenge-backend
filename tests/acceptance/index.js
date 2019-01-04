@@ -15,6 +15,14 @@ describe('API', () => {
   it('should be configured to run on port 3000 when no PORT env var is defined', () => {
     expect(app.get('port')).to.equal(3000)
   })
+  it('should have a /metrics endpoint that works propperly', () => {
+    request(app)
+      .get('/metrics')
+      .expect(200)
+      .end((err, res) => {
+        done(err)
+      })
+  })
 })
 
 describe('/account endpoint', () => {
