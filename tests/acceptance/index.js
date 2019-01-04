@@ -30,7 +30,7 @@ describe('/account endpoint', () => {
         expect(res.body.docs.email).to.equal('foo@bar.com')
         done(err)
       })
-  })
+  }).timeout(500)
 
   it('retrieve at least one record on GET /accounts after a valid POST was performed', done => {
     request(app)
@@ -113,6 +113,31 @@ describe('/account endpoint', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             done(err)
+          })
+      })
+  })
+
+  it('should not allow to create an account with an email already registered', done => {
+    let currentAccountId
+    request(app)
+      .post('/account')
+      .send({ email: 'duplicated@email.com' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body.docs).to.exist
+        expect(res.body.docs).to.be.an('object')
+        expect(res.body.docs.email).to.equal('duplicated@email.com')
+        currentAccountId = res.body.docs._id
+
+        request(app)
+          .post('/account')
+          .send({ email: 'duplicated@email.com' })
+          .expect(400)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            expect(err).to.exist
+            done()
           })
       })
   })

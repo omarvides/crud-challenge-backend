@@ -5,6 +5,15 @@ function configureRoutes(app, controllers) {
   app.post('/account', (req, res) => {
     controllers.create(req.body, (err, docs) => {
       if (err) {
+        if (err.errmsg && err.errmsg.includes('E11000')) {
+          res.statusCode = 400
+          logger.error(`Error: on POST /account ${err}`)
+          return res.send(
+            `An error ocurred while registering the account, email ${
+              req.body.email
+            } already exist`,
+          )
+        }
         res.statusCode = 500
         logger.error(`Error: on POST /account ${err}`)
         return res.send('An error ocurred while registering the account')
