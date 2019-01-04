@@ -8,7 +8,8 @@ const metricsMiddleware = promBundle(promconfig)
 const accountControllers = require('./controllers/account-controller')
 const accountRoutes = require('./routes/account-routes')
 const accountModel = require('./models/account').createModel(
-  process.env.MONGODB_URI,
+  `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@` +
+    `${process.env.DB_HOST}:${process.env.DB_PORT}`,
 )
 const app = express()
 
