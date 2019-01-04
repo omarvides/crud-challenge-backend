@@ -4,7 +4,7 @@ pipeline:
     commands:
       - npm install
       - npm test
-  backend:
+  acceptance:
     image: node:8-alpine
     environment:
       - DB_HOST=database
