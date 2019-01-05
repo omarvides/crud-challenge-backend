@@ -44,6 +44,20 @@ function configureRoutes(app, controllers) {
       return res.json({ result: 'success', docs })
     })
   })
+  app.get('/email/:email', (req, res) => {
+    controllers.getByEmail(req.params, (err, docs) => {
+      if (err) {
+        res.statusCode = 500
+        logger.error(`Error: on GET /email/:email ${err}`)
+        return res.send('An error ocurred while querying the email')
+      }
+      res.statusCode = 200
+      if (docs.length > 0) {
+        return res.json({ result: 'success', exists: true })
+      }
+      return res.json({ result: 'success', exists: false })
+    })
+  })
   app.put('/account/:id', (req, res) => {
     controllers.update(req, (err, docs) => {
       if (err) {

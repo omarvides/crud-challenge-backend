@@ -151,3 +151,29 @@ describe('/account endpoint', () => {
       })
   })
 })
+
+describe('/email endpoint', () => {
+  it('should allow to query if an email exists', done => {
+    let currentAccountId
+    request(app)
+      .post('/account')
+      .send({ email: 'samplequery@email.com' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body.docs).to.exist
+        expect(res.body.docs).to.be.an('object')
+        expect(res.body.docs.email).to.equal('samplequery@email.com')
+        currentAccountId = res.body.docs._id
+
+        request(app)
+          .get(`/email/samplequery@email.com`)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            expect(res.body.exists).to.equal(true)
+            done(err)
+          })
+      })
+  })
+})

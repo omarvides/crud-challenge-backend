@@ -27,6 +27,17 @@ function configure(model) {
         return callback(null, object)
       })
     },
+    getByEmail(params, callback) {
+      const query = {
+        email: params.email,
+      }
+      model.getAccount({ query: query }, (err, object) => {
+        if (err) {
+          return callback(err)
+        }
+        return callback(null, object)
+      })
+    },
     update(params, callback) {
       model.updateAccount(
         { id: params.id, email: params.body.email },

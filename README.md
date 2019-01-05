@@ -164,7 +164,3 @@ The objective of current acceptance tests is to describe the expected behavior o
 ## Changelog
 
 [CHANGELOG DOCUMENT](CHANGELOG.md)
-
-```
-
-```
