@@ -41,6 +41,20 @@ describe('/account endpoint', () => {
       })
   }).timeout(500)
 
+  it('should answer with 400: Bad request when a non valid email is sent to POST: /account', done => {
+    request(app)
+      .post('/account')
+      .send({ email: 'non_valid_email' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.text).to.equal(
+          '{"message":"The value of email must be a valid email"}',
+        )
+        done()
+      })
+  }).timeout(500)
+
   it('retrieve at least one record on GET /accounts after a valid POST was performed', done => {
     request(app)
       .get('/accounts')
@@ -99,6 +113,33 @@ describe('/account endpoint', () => {
           .end((err, res) => {
             expect(res.body.docs.email).to.equal('different@mail.com')
             done(err)
+          })
+      })
+  })
+
+  it('should answer with 400: Bad request when trying to update with a non valid email via PUT: /account', done => {
+    let currentAccountId
+    request(app)
+      .post('/account')
+      .send({ email: 'yetanother@email.com' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body.docs).to.exist
+        expect(res.body.docs).to.be.an('object')
+        expect(res.body.docs.email).to.equal('yetanother@email.com')
+        currentAccountId = res.body.docs._id
+
+        request(app)
+          .post('/account')
+          .send({ email: 'non_valid_email' })
+          .expect(400)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            expect(res.text).to.equal(
+              '{"message":"The value of email must be a valid email"}',
+            )
+            done()
           })
       })
   })
