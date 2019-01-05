@@ -1,8 +1,13 @@
 function name(params) {}
 const logger = require('../utils/logger')
+const {
+  expressJoi,
+  createSchema,
+  updateSchema,
+} = require('../utils/joi-validator')
 
 function configureRoutes(app, controllers) {
-  app.post('/account', (req, res) => {
+  app.post('/account', expressJoi.joiValidate(createSchema), (req, res) => {
     controllers.create(req.body, (err, docs) => {
       if (err) {
         if (err.errmsg && err.errmsg.includes('E11000')) {
@@ -44,7 +49,7 @@ function configureRoutes(app, controllers) {
       return res.json({ result: 'success', docs })
     })
   })
-  app.get('/email/:email', (req, res) => {
+  app.get('/email/:email', expressJoi.joiValidate(createSchema), (req, res) => {
     controllers.getByEmail(req.params, (err, docs) => {
       if (err) {
         res.statusCode = 500
@@ -58,18 +63,21 @@ function configureRoutes(app, controllers) {
       return res.json({ result: 'success', exists: false })
     })
   })
-  app.put('/account/:id', (req, res) => {
+  app.put('/account/:id', expressJoi.joiValidate(updateSchema), (req, res) => {
     controllers.update(req, (err, docs) => {
       if (err) {
+        if (err.errmsg && err.errmsg.includes('E11000')) {
+          res.statusCode = 400
+          logger.error(`Error: on PUT /account ${err}`)
+          return res.send(
+            `An error ocurred while updating the account, email ${
+              req.body.email
+            } already exist`,
+          )
+        }
         res.statusCode = 500
-        logger.error(
-          `Error: on PUT /account/:id ${err} while updating the account ${
-            req.param.id
-          }`,
-        )
-        return res.send(
-          `An error ocurred while updating the account ${req.param.id}`,
-        )
+        logger.error(`Error: on PUT /account ${err}`)
+        return res.send('An error ocurred while updating the account')
       }
       res.statusCode = 200
       return res.json({ result: 'success', docs })

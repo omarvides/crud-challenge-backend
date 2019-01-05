@@ -276,6 +276,12 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
+express-joi@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/express-joi/-/express-joi-0.3.1.tgz#5724a5209175dcc3319882101615efa7039c3fc9"
+  dependencies:
+    joi "2.9.0"
+
 express-prom-bundle@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/express-prom-bundle/-/express-prom-bundle-4.2.1.tgz#e88754c231af2af062429f9f84c0b61dee0d85b5"
@@ -394,6 +400,10 @@ he@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+hoek@1.x.x:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-1.5.2.tgz#d1038115c3046faf11bb089c25e8b409b1b7d8ca"
+
 http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
   version "1.6.3"
   resolved "http://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
@@ -439,6 +449,12 @@ isarray@~1.0.0:
 isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
+
+joi@2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-2.9.0.tgz#995e0a661c2a847308d5bb990264d439d2ca49d6"
+  dependencies:
+    hoek "1.x.x"
 
 kareem@2.3.0:
   version "2.3.0"
