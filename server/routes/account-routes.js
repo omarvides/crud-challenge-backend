@@ -4,7 +4,7 @@ const {
   expressJoi,
   createSchema,
   updateSchema,
-} = require('../utils/joi-validator')
+} = require('../utils/request-validator')
 
 function configureRoutes(app, controllers) {
   app.post('/account', expressJoi.joiValidate(createSchema), (req, res) => {
