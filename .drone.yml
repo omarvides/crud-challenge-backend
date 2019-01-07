@@ -11,7 +11,7 @@ pipeline:
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_PORT=27017
-      - DATABASE=accounts?authSource=admin
+      - DATABASE=admin
     commands:
       - sleep 15
       - npm install
