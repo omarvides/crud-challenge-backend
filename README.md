@@ -24,7 +24,7 @@ Unit tests have no dependency other that the source code itself, and can be run 
 $ npm test
 ```
 
-or
+or if you prefer to use yarn and is already installed in your computer (node i -g yarn)
 
 ```bash
 $ yarn test
@@ -73,6 +73,7 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=root
 DB_PORT=27017
+DATABASE=accounts?authSource=admin
 ```
 
 3. Create a file named docker-compose.yml in any place in the computer, preferably different that the directory where the API code was cloned
@@ -143,11 +144,11 @@ The objective of current acceptance tests is to describe the expected behavior o
 - It should allow to update the email of an account after it is created.
 - The API should allow to delete an existing account.
 - The API should not allow to create an account with an email that is already registered.
+- Non valid emails will return a 400 bad request when creating using POST: /account.
 
 **TODO**
 
-- A valid Id can be passed to the API and it should create the account succesfully
-- Non valid emails will return a 400 bad request when creating using POST: /account
+- A valid Id can be passed to the API and it should create the account succesfully.
 
 ### Unit tests
 

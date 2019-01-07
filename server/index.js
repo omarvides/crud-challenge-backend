@@ -9,7 +9,7 @@ const accountControllers = require('./controllers/account-controller')
 const accountRoutes = require('./routes/account-routes')
 const accountModel = require('./models/account').createModel(
   `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@` +
-    `${process.env.DB_HOST}:${process.env.DB_PORT}`,
+    `${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DATABASE}`,
 )
 const app = express()
 

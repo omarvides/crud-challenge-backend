@@ -10,7 +10,10 @@ function createModel(connectionString) {
 
   function createAccount(options, callback) {
     mongoose
-      .connect(connectionString)
+      .connect(
+        connectionString,
+        { useNewUrlParser: true },
+      )
       .then(() => {
         const newAccount = new Account({
           email: options.email,
@@ -28,7 +31,10 @@ function createModel(connectionString) {
   }
   function getAccount(options, callback) {
     mongoose
-      .connect(connectionString)
+      .connect(
+        connectionString,
+        { useNewUrlParser: true },
+      )
       .then(() => {
         Account.find(options.query)
           .exec()
@@ -42,7 +48,10 @@ function createModel(connectionString) {
   }
   function updateAccount(options, callback) {
     mongoose
-      .connect(connectionString)
+      .connect(
+        connectionString,
+        { useNewUrlParser: true },
+      )
       .then(() => {
         Account.findOne(options.id)
           .exec()
@@ -59,7 +68,10 @@ function createModel(connectionString) {
   }
   function deleteAccount(options, callback) {
     mongoose
-      .connect(connectionString)
+      .connect(
+        connectionString,
+        { useNewUrlParser: true },
+      )
       .then(() => {
         Account.deleteOne({ id: options.id })
           .exec()
