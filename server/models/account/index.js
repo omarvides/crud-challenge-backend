@@ -16,6 +16,7 @@ function createModel(connectionString) {
       )
       .then(() => {
         const newAccount = new Account({
+          _id: options.id,
           email: options.email,
         })
         newAccount.save().then(

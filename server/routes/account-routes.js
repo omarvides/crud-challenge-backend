@@ -14,9 +14,9 @@ function configureRoutes(app, controllers) {
           res.statusCode = 400
           logger.error(`Error: on POST /account ${err}`)
           return res.send(
-            `An error ocurred while registering the account, email ${
-              req.body.email
-            } already exist`,
+            `An error ocurred while registering the account, email or id ${
+              req.body.id
+            } ${req.body.email} already exist`,
           )
         }
         res.statusCode = 500
@@ -70,9 +70,9 @@ function configureRoutes(app, controllers) {
           res.statusCode = 400
           logger.error(`Error: on PUT /account ${err}`)
           return res.send(
-            `An error ocurred while updating the account, email ${
-              req.body.email
-            } already exist`,
+            `An error ocurred while updating the account, email or id ${
+              req.id
+            }, ${req.body.email} already exist`,
           )
         }
         res.statusCode = 500
