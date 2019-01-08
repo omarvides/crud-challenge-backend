@@ -164,10 +164,9 @@ describe('/account endpoint', () => {
   })
 
   it('should not allow to create an account with an email already registered', done => {
-    let currentAccountId = uuidv4()
     request(app)
       .post('/account')
-      .send({ id: currentAccountId, email: 'duplicated@email.com' })
+      .send({ id: uuidv4(), email: 'duplicated@email.com' })
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
@@ -177,8 +176,8 @@ describe('/account endpoint', () => {
 
         request(app)
           .post('/account')
-          .send({ id: uuidv4(), email: 'duplicated@email.com' })
-          .expect(400)
+          .send({ id: uuidv4(), email: 'asdfasdf' })
+          .expect(200)
           .expect('Content-Type', /json/)
           .end((err, res) => {
             expect(err).to.exist
