@@ -9,6 +9,8 @@ This is a restful API to perform CRUD operations on a specific resource
 
 ## Deployment
 
+TODO
+
 ## Testing
 
 To prevent broken commits, this repository uses node pre-commit module, it is configured to run
@@ -73,8 +75,10 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=root
 DB_PORT=27017
-DATABASE=accounts?authSource=admin
+DATABASE=admin
 ```
+
+we are using admin database here since we don't need to create a real database for the integration tests to run.
 
 3. Create a file named docker-compose.yml in any place in the computer, preferably different that the directory where the API code was cloned
 4. Add the code below to the docker-compose.yml file
@@ -117,10 +121,10 @@ This will run the acceptance tests locally using the mongodb database
 This repository is already configured with a .drone.yml file that contains all the steps to
 
 - Run in a Drone.io server
-- Start and stop the data services containers that it needs
+- Start and stop the data services containers that it needs (mongodb in this case)
 - Package the API into a docker container, it uses the docker/Dockerfile found in this repository
 
-I'm currently using a Drone.io server I personally created using terraform, hosted on Digital Ocean, it is located at
+I'm currently using a Drone.io server I personally created using terraform, hosted on Digital Ocean, managed by terraform, it is located at
 
 https://github.clouderx.com
 
@@ -129,7 +133,7 @@ anytime, the builds of the project can be found under
 
 https://github.clouderx.com/omarvides/crud-challenge-backend
 
-I'm keeping this builds public to allow anyone grading my solution of the challenge to be able to see the builds.
+I'm keeping this builds public to allow anyone grading my solution of the challenge to be able to see the builds :).
 
 ### Acceptance tests
 
@@ -145,10 +149,12 @@ The objective of current acceptance tests is to describe the expected behavior o
 - The API should allow to delete an existing account.
 - The API should not allow to create an account with an email that is already registered.
 - Non valid emails will return a 400 bad request when creating using POST: /account.
+- A valid Id can be passed to the API and it should create the account succesfully.
+- Should not allow to create an account with an id already registered.
+- should not allow to create an account with an email already registered.
+- Should not allow to update an account with an email that is already registered.
 
 **TODO**
-
-- A valid Id can be passed to the API and it should create the account succesfully.
 
 ### Unit tests
 
@@ -164,4 +170,4 @@ The objective of current acceptance tests is to describe the expected behavior o
 
 ## Changelog
 
-[CHANGELOG DOCUMENT](CHANGELOG.md)
+To see what changed on each version please visit the [changelog document](CHANGELOG.md) which contains detailed information about what changed in each version
