@@ -1,15 +1,20 @@
 pipeline:
-  backend:
-    image: node
+  unit:
+    image: node:8-alpine
+    commands:
+      - npm install
+      - npm test
+  acceptance:
+    image: node:8-alpine
     environment:
       - DB_HOST=database
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_PORT=27017
+      - DATABASE=admin
     commands:
       - sleep 15
       - npm install
-      - npm test
       - npm run acceptance
   docker_publish:
     image: plugins/docker:17.12

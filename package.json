@@ -1,7 +1,7 @@
 {
   "name": "crud-challenge-api",
-  "version": "0.0.0",
-  "description": "A Crud API for entity with: Id and Email",
+  "version": "1.0.0",
+  "description": "A Crud API to manage accouts with: Id and Email",
   "main": "index.js",
   "repository": "https://github.com/omarvides/crud-challenge-backend",
   "author": "omarvides <omarvides@gmail.com>",
@@ -9,7 +9,7 @@
     "lint": "node_modules/prettier/bin-prettier.js --config prettier.config.js --list-different '**/*.js'",
     "start": "node server/index.js",
     "test": "node_modules/mocha/bin/mocha --exit --recursive ./tests/unit",
-    "acceptance": "node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
+    "acceptance": "LOG_LEVEL=error node_modules/mocha/bin/mocha --exit --recursive ./tests/acceptance"
   },
   "pre-commit": [
     "lint",
@@ -17,9 +17,12 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "express-joi": "^0.3.1",
     "express-prom-bundle": "^4.2.1",
+    "mongoose": "^5.4.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {
@@ -27,6 +30,8 @@
     "mocha": "^5.2.0",
     "pre-commit": "^1.2.2",
     "prettier": "1.15.3",
-    "supertest": "^3.3.0"
+    "sinon": "^7.2.2",
+    "supertest": "^3.3.0",
+    "uuid": "^3.3.2"
   }
 }
