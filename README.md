@@ -7,9 +7,175 @@
 
 This is a restful API to perform CRUD operations on a specific resource
 
-## Deployment
+## Running this API locally
 
-TODO
+### From source
+
+1. Install docker on your computer ([Install from this link for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac))
+
+2. Create a file named docker-compose.yml somewhere in your computer with the content
+
+```yaml
+version: '3'
+services:
+  mongo:
+    image: mongo:3.7
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - "27017:27017
+```
+
+3. Run in the directory where the docker-compose.yml file is located
+
+```
+docker-compose up -d
+```
+
+4. Install nvm in your computer, this [Guide](https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/) can be used for both mac and linux
+5. Clone this repository in a directory in your local computer
+6. Inside the just created directory create a file named .env, with the content below
+
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=root
+DB_PORT=27017
+DATABASE=admin
+```
+
+7. Move to the directory
+8. Install node 8 with nvm
+
+```
+nvm install 8
+```
+
+9. Set nvm to use node 8
+
+```
+nvm use 8
+```
+
+10. Install dependencies by running
+
+```
+npm install
+```
+
+or if you prefer to use yarn and is already installed in your computer (node i -g yarn)
+
+```
+yarn install
+```
+
+11. Start the API by running
+
+```
+yarn start
+
+```
+
+Alternatively you can use nodemon to run this API, this is useful on development, if so, run:
+
+```
+npm install -g nodemon
+
+nodemon server/index.js
+```
+
+Last step should start the API successfully and it should be ready te be used, you can use tools like [Postman](https://www.getpostman.com/downloads/) to test the API
+
+### From Docker container
+
+#### From registry
+
+1. Install docker on your computer ([Install from this link for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac))
+
+2. Create a file named docker-compose.yml somewhere in your computer with the content
+
+```yaml
+version: '3'
+services:
+  mongo:
+    image: mongo:3.7
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - "27017:27017
+```
+
+3. Run in the directory where the docker-compose.yml file is located
+
+```
+docker-compose up -d
+```
+
+4. Once Docker is installed run
+
+```bash
+docker pull omarvides/crud-challenge:latest
+```
+
+5. Run the container with the following command (assuming there is no process using the port 3000 currently on your development environment)
+
+```
+docker run -d -ti -p 3000:3000 --name crud-api  -e DB_HOST=localhost -e DB_USER=root -e DB_PASSWORD=root -e DB_PORT=27017 -e DATABASE=admin omarvides/crud-challenge:latest
+```
+
+**To stop the container**
+
+```
+docker stop crud-api
+docker rm -f crud-api
+```
+
+#### Building docker image locally
+
+1. Install docker on your computer ([Install from this link for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac))
+
+2. Clone this repository in a directory in your local computer
+
+3. Create a file named docker-compose.yml somewhere in your computer with the content
+
+```yaml
+version: '3'
+services:
+  mongo:
+    image: mongo:3.7
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - "27017:27017
+```
+
+4. Run in the directory where the docker-compose.yml file is located
+
+```
+docker-compose up -d
+```
+
+5. Once Docker is installed, the mongo service running and the repository cloned, inside the just cloned repository run
+
+```bash
+docker build -f docker/Dockerfile . -t crud-api
+```
+
+6. Run the container with the following command (assuming there is no process using the port 3000 currently on your development environment)
+
+```
+docker run -d -ti -p 3000:3000 --name crud-api  -e DB_HOST=localhost -e DB_USER=root -e DB_PASSWORD=root -e DB_PORT=27017 -e DATABASE=admin crud-challenge:latest
+```
+
+**To stop the container**
+
+```
+docker stop crud-api
+docker rm -f crud-api
+```
 
 ## Testing
 
@@ -23,13 +189,13 @@ To prevent broken commits, this repository uses node pre-commit module, it is co
 Unit tests have no dependency other that the source code itself, and can be run with the command
 
 ```bash
-$ npm test
+npm test
 ```
 
 or if you prefer to use yarn and is already installed in your computer (node i -g yarn)
 
 ```bash
-$ yarn test
+yarn test
 ```
 
 ### Running acceptance tests
@@ -65,7 +231,7 @@ Resources that could help you configuring your environment
 1. Clone this repository to a location in your computer by running
 
 ```bash
-$ git clone git@github.com:omarvides/crud-challenge-backend.git
+git clone git@github.com:omarvides/crud-challenge-backend.git
 ```
 
 2. Inside the just created directory create a file named .env, with the content below
@@ -105,13 +271,13 @@ docker-compose down && docker-compose up -d
 6. Inside the directory you cloned the API run
 
 ```bash
-$ npm run acceptance
+npm run acceptance
 ```
 
 or if you prefer to use yarn and is already installed in your computer (node i -g yarn)
 
 ```bash
-$ yarn run acceptance
+yarn run acceptance
 ```
 
 This will run the acceptance tests locally using the mongodb database
@@ -154,19 +320,18 @@ The objective of current acceptance tests is to describe the expected behavior o
 - should not allow to create an account with an email already registered.
 - Should not allow to update an account with an email that is already registered.
 
-**TODO**
-
 ### Unit tests
-
-**TODO**
 
 - Validate that each component returns what's expected from them and behaves as expected
   - controllers
-  - routes
   - models
   - middlewares
 
-## Development
+## Deployment
+
+This solution will be deployed in a kubernetes cluster, and the yaml definitions will be managed in this repository
+
+https://github.com/omarvides/crud-k8s-deployment
 
 ## Changelog
 
