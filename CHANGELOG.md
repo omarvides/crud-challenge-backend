@@ -11,6 +11,7 @@
 - [x] Acceptance tests
 - [x] Utils
 - [x] Drone pipeline
+- [x] Response transformation util
 
 ## 0.1.0
 
