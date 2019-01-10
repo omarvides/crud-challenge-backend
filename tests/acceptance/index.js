@@ -35,9 +35,9 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('foo@bar.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('foo@bar.com')
         done(err)
       })
   }).timeout(500)
@@ -62,8 +62,8 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body).to.be.an('object')
-        expect(res.body.docs.length).to.be.greaterThan(0)
+        expect(res.body).to.be.an('array')
+        expect(res.body.length).to.be.greaterThan(0)
         done(err)
       })
   })
@@ -76,16 +76,16 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('samplefoo@samplebar.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('samplefoo@samplebar.com')
 
         request(app)
           .get(`/account/${currentAccountId}`)
           .expect(200)
           .expect('Content-Type', /json/)
           .end((err, res) => {
-            expect(res.body.docs[0].email).to.equal('samplefoo@samplebar.com')
+            expect(res.body[0].email).to.equal('samplefoo@samplebar.com')
             done(err)
           })
       })
@@ -99,9 +99,9 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('abc@def.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('abc@def.com')
 
         request(app)
           .put(`/account/${currentAccountId}`)
@@ -109,7 +109,7 @@ describe('/account endpoint', () => {
           .expect(200)
           .expect('Content-Type', /json/)
           .end((err, res) => {
-            expect(res.body.docs.email).to.equal('different@mail.com')
+            expect(res.body.email).to.equal('different@mail.com')
             done(err)
           })
       })
@@ -123,9 +123,9 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('yetanother@email.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('yetanother@email.com')
 
         request(app)
           .put(`/account/${currentAccountId}`)
@@ -149,9 +149,9 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('delete@me.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('delete@me.com')
 
         request(app)
           .delete(`/account/${currentAccountId}`)
@@ -170,9 +170,9 @@ describe('/account endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('duplicated@email.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('duplicated@email.com')
 
         request(app)
           .post('/account')
@@ -195,9 +195,9 @@ it('should not allow to create an account with an id already registered', done =
     .expect(200)
     .expect('Content-Type', /json/)
     .end((err, res) => {
-      expect(res.body.docs).to.exist
-      expect(res.body.docs).to.be.an('object')
-      expect(res.body.docs.email).to.equal('anew@email.com')
+      expect(res.body).to.exist
+      expect(res.body).to.be.an('object')
+      expect(res.body.email).to.equal('anew@email.com')
 
       request(app)
         .post('/account')
@@ -220,9 +220,9 @@ it('should not allow to update an account with an email that is already register
     .expect(200)
     .expect('Content-Type', /json/)
     .end((err, res) => {
-      expect(res.body.docs).to.exist
-      expect(res.body.docs).to.be.an('object')
-      expect(res.body.docs.email).to.equal('first@email.com')
+      expect(res.body).to.exist
+      expect(res.body).to.be.an('object')
+      expect(res.body.email).to.equal('first@email.com')
 
       request(app)
         .post('/account')
@@ -230,9 +230,9 @@ it('should not allow to update an account with an email that is already register
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          expect(res.body.docs).to.exist
-          expect(res.body.docs).to.be.an('object')
-          expect(res.body.docs.email).to.equal('second@email.com')
+          expect(res.body).to.exist
+          expect(res.body).to.be.an('object')
+          expect(res.body.email).to.equal('second@email.com')
 
           request(app)
             .put(`/account/${secondAccountId}`)
@@ -256,9 +256,9 @@ describe('/email endpoint', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body.docs).to.exist
-        expect(res.body.docs).to.be.an('object')
-        expect(res.body.docs.email).to.equal('samplequery@email.com')
+        expect(res.body).to.exist
+        expect(res.body).to.be.an('object')
+        expect(res.body.email).to.equal('samplequery@email.com')
 
         request(app)
           .get(`/email/samplequery@email.com`)

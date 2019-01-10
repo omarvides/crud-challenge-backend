@@ -22,6 +22,7 @@
     "express": "^4.16.4",
     "express-joi": "^0.3.1",
     "express-prom-bundle": "^4.2.1",
+    "json-transformer-node": "^1.0.4",
     "mongoose": "^5.4.1",
     "winston": "^3.1.0"
   },
