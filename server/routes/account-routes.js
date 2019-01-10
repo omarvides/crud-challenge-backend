@@ -1,5 +1,6 @@
 function name(params) {}
 const logger = require('../utils/logger')
+const { transformSingleElement } = require('../utils/response-transform')
 const {
   expressJoi,
   createSchema,
@@ -23,8 +24,17 @@ function configureRoutes(app, controllers) {
         logger.error(`Error: on POST /account ${err}`)
         return res.send('An error ocurred while registering the account')
       }
-      res.statusCode = 200
-      return res.json({ result: 'success', docs })
+      transformSingleElement(docs, (err, result) => {
+        if (err) {
+          res.statusCode = 500
+          logger.error(
+            `Error: while transforming the response on POST /account ${err}`,
+          )
+          return res.send('An error ocurred while registering the account')
+        }
+        res.statusCode = 200
+        return res.json(result)
+      })
     })
   })
   app.get('/accounts', (req, res) => {
@@ -35,7 +45,7 @@ function configureRoutes(app, controllers) {
         return res.send('An error ocurred while fetching accounts')
       }
       res.statusCode = 200
-      return res.json({ result: 'success', docs })
+      return res.json(docs)
     })
   })
   app.get('/account/:id', (req, res) => {
@@ -46,7 +56,7 @@ function configureRoutes(app, controllers) {
         return res.send('An error ocurred while fetching accounts')
       }
       res.statusCode = 200
-      return res.json({ result: 'success', docs })
+      return res.json(docs)
     })
   })
   app.get('/email/:email', expressJoi.joiValidate(createSchema), (req, res) => {
@@ -58,9 +68,9 @@ function configureRoutes(app, controllers) {
       }
       res.statusCode = 200
       if (docs.length > 0) {
-        return res.json({ result: 'success', exists: true })
+        return res.json({ exists: true })
       }
-      return res.json({ result: 'success', exists: false })
+      return res.json({ exists: false })
     })
   })
   app.put('/account/:id', expressJoi.joiValidate(updateSchema), (req, res) => {
@@ -80,7 +90,7 @@ function configureRoutes(app, controllers) {
         return res.send('An error ocurred while updating the account')
       }
       res.statusCode = 200
-      return res.json({ result: 'success', docs })
+      return res.json(docs)
     })
   })
   app.delete('/account/:id', (req, res) => {
@@ -93,7 +103,7 @@ function configureRoutes(app, controllers) {
         )
       }
       res.statusCode = 200
-      return res.json({ result: 'success', docs })
+      return res.json(docs)
     })
   })
 }
