@@ -56,9 +56,9 @@ describe('/account endpoint', () => {
       })
   }).timeout(500)
 
-  it('retrieve at least one record on GET /accounts after a valid POST was performed', done => {
+  it('retrieve at least one record on GET /account after a valid POST was performed', done => {
     request(app)
-      .get('/accounts')
+      .get('/account')
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
