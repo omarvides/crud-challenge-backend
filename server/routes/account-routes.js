@@ -37,11 +37,11 @@ function configureRoutes(app, controllers) {
       })
     })
   })
-  app.get('/accounts', (req, res) => {
+  app.get('/account', (req, res) => {
     controllers.get({ query: {} }, (err, docs) => {
       if (err) {
         res.statusCode = 500
-        logger.error(`Error: on GET /accounts ${err}`)
+        logger.error(`Error: on GET /account ${err}`)
         return res.send('An error ocurred while fetching accounts')
       }
       res.statusCode = 200
